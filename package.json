@@ -1,0 +1,31 @@
+{
+  "name": "business-function-costing",
+  "version": "1.0.0",
+  "description": "Borathon event - Cost Pricing solutions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp",
+    "startServer": "http-server",
+    "start": "npm run build & npm run startServer"
+  },
+  "keywords": [
+    "Borathon",
+    "Cost",
+    "pricing",
+    "vmware",
+    "business function costing"
+  ],
+  "author": "Mageshwaran Rajendran",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "bootstrap": "^4.0.0-alpha.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-minify": "0.0.14",
+    "gulp-sass": "^2.3.2",
+    "http-server": "^0.9.0"
+  }
+}
