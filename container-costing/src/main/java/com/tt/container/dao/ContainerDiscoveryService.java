@@ -19,7 +19,7 @@ public class ContainerDiscoveryService extends JaxRsBridgeStatelessService {
 
 
   @GET
-  public List<Container> getContainers(Underlyer host) throws DockerException, InterruptedException {
+  public List<Container> getContainers(List<Underlyer> host) throws DockerException, InterruptedException {
 
 //    DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
 //        .withDockerHost("tcp://my-docker-host.tld:2376")
