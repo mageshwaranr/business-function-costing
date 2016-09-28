@@ -1,0 +1,7 @@
+//common xenon
+include 'xenon-bridge'
+include 'container-costing'
+
+
+//include 'demo-account-contracts'
+//project(':demo-account-contracts').projectDir = "$rootDir/demo-account/contracts" as File
