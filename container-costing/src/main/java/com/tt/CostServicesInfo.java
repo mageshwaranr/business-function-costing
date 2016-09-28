@@ -1,5 +1,6 @@
 package com.tt;
 
+import com.tt.container.dao.ContainerDiscoveryService;
 import com.tt.container.dao.UnderlyerDaoService;
 import com.tt.ui.svc.ChartingService;
 import com.tt.underlyer.svc.UnderlyerService;
@@ -14,6 +15,7 @@ public enum CostServicesInfo implements ServiceInfo {
 //  ACCOUNT_QUERY_SERVICE("ACCOUNT_QUERY_SERVICE", "/vrbc/demo/account/query/name"),
   UNDERLYER_DAO("UnderlyerDaoService", UnderlyerDaoService.SELF_LINK),
   UNDERLYER_SVC("UnderlyerService", UnderlyerService.SELF_LINK),
+  CONTAINER_DISCOVERY_SVC("ContainerDiscoveryService", ContainerDiscoveryService.SELF_LINK),
   UI_SERVICE ("CostingUiService", ChartingService.SELF_LINK);
 
   private String name, link;

@@ -313,6 +313,7 @@ public class JaxRsServiceClient implements InvocationHandler {
 
     public ClientBuilder withHost(ServiceHost host) {
       this.host = host;
+      this.baseUri = host.getPublicUri();
       return this;
     }
 
