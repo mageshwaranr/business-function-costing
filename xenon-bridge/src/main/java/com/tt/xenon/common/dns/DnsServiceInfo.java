@@ -1,11 +1,11 @@
 package com.tt.xenon.common.dns;
 
-import com.tt.xenon.common.VrbcServiceInfo;
+import com.tt.xenon.common.ServiceInfo;
 
 /**
  * Created by mageshwaranr on 8/31/2016.
  */
-public enum DnsServiceInfo implements VrbcServiceInfo {
+public enum DnsServiceInfo implements ServiceInfo {
 
   DNS("VrbcDNSService", "/core/dns/service-records"),
   DNS_QUERY("VrbcDNSQueryService", "/core/dns/service-records/query");

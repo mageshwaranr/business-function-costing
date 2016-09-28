@@ -9,6 +9,7 @@ dependencies {
 
     compile project(':xenon-bridge')
     compile 'com.github.docker-java:docker-java:3.0.6'
+    compile group: 'com.spotify', name: 'docker-client', version: '6.0.0'
 
 
     testCompile group: 'junit', name: 'junit', version: junitVersion

@@ -5,7 +5,7 @@ import static com.vmware.xenon.common.ServiceHost.SERVICE_URI_SUFFIX_AVAILABLE;
 /**
  * Created by mageshwaranr on 8/26/2016.
  */
-public interface VrbcServiceInfo {
+public interface ServiceInfo {
   /**
    * Returns self serviceLink
    *

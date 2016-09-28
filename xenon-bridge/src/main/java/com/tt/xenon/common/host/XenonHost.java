@@ -1,7 +1,7 @@
 package com.tt.xenon.common.host;
 
 import com.tt.xenon.common.dns.XenonDnsService;
-import com.tt.xenon.common.VrbcServiceInfo;
+import com.tt.xenon.common.ServiceInfo;
 import com.tt.xenon.common.client.JaxRsServiceClient;
 import com.tt.xenon.common.dns.document.DnsState;
 import com.vmware.xenon.common.FactoryService;
@@ -67,7 +67,7 @@ public class XenonHost extends ServiceHost {
   }
 
 
-  public ServiceHost startFactoryServices(Map<VrbcServiceInfo, FactoryService> factoryServiceMap) {
+  public ServiceHost startFactoryServices(Map<ServiceInfo, FactoryService> factoryServiceMap) {
     factoryServiceMap.forEach((serviceInfo, statelessService) -> {
       super.startService(Operation.createPost(buildUri(this, serviceInfo.serviceLink())), statelessService);
       registerWithDns(cloneWithAvailabilityYes(serviceInfo));
@@ -78,8 +78,9 @@ public class XenonHost extends ServiceHost {
   }
 
 
-  public ServiceHost startStatelessServices(Map<VrbcServiceInfo, StatelessService> statelessServiceMap) {
+  public ServiceHost startStatelessServices(Map<ServiceInfo, StatelessService> statelessServiceMap) {
     statelessServiceMap.forEach((serviceInfo, statelessService) -> {
+      log.info("Starting {} service with uri {}", serviceInfo.serviceName(), serviceInfo.serviceLink());
       super.startService(Operation.createPost(buildUri(this, serviceInfo.serviceLink())), statelessService);
       registerWithDns(serviceInfo);
     });
@@ -87,14 +88,14 @@ public class XenonHost extends ServiceHost {
     return this;
   }
 
-  public ServiceHost registerWithDns(VrbcServiceInfo serviceInfo) {
+  public ServiceHost registerWithDns(ServiceInfo serviceInfo) {
     return registerWithDns(serviceInfo, this.getUri());
   }
 
 
-  public ServiceHost registerWithDns(VrbcServiceInfo serviceInfo, URI serviceHostUri) {
+  public ServiceHost registerWithDns(ServiceInfo serviceInfo, URI serviceHostUri) {
     dnsService.ifPresent(dns -> {
-      DnsState state = toDnsState(serviceInfo,serviceHostUri);
+      DnsState state = toDnsState(serviceInfo, serviceHostUri);
       DnsState savedDns = dns.registerService(state);
       log.info("Registered service {} with URI {} with DNS @ {}", savedDns.serviceName, savedDns.serviceLink, dnsHostUri);
     });
@@ -108,7 +109,7 @@ public class XenonHost extends ServiceHost {
     // Provide API metainfo
     Info apiInfo = new Info();
     apiInfo.setVersion("1.0.0");
-    apiInfo.setTitle("Vrbc Xenon Host");
+    apiInfo.setTitle("Xenon Host");
     swagger.setInfo(apiInfo);
 
     // Serve swagger on default uri
@@ -122,9 +123,9 @@ public class XenonHost extends ServiceHost {
 
   public static class HostBuilder {
 
-    private Map<VrbcServiceInfo, FactoryService> factoryServices = new HashMap<>();
-    private Map<VrbcServiceInfo, StatelessService> statelessServices = new HashMap<>();
-    private Map<VrbcServiceInfo, String> dnsRegistry = new HashMap<>();
+    private Map<ServiceInfo, FactoryService> factoryServices = new HashMap<>();
+    private Map<ServiceInfo, StatelessService> statelessServices = new HashMap<>();
+    private Map<ServiceInfo, String> dnsRegistry = new HashMap<>();
     private String[] cmdArgs = new String[0];
     private Arguments args;
     private String dnsHostUri;
@@ -134,17 +135,17 @@ public class XenonHost extends ServiceHost {
       return this;
     }
 
-    public HostBuilder withService(VrbcServiceInfo info, FactoryService service) {
+    public HostBuilder withService(ServiceInfo info, FactoryService service) {
       factoryServices.put(info, service);
       return this;
     }
 
-    public HostBuilder withService(VrbcServiceInfo info, StatelessService service) {
+    public HostBuilder withService(ServiceInfo info, StatelessService service) {
       statelessServices.put(info, service);
       return this;
     }
 
-    public HostBuilder registerWithDns(VrbcServiceInfo info, String hostUri) {
+    public HostBuilder registerWithDns(ServiceInfo info, String hostUri) {
       dnsRegistry.put(info, hostUri);
       return this;
     }

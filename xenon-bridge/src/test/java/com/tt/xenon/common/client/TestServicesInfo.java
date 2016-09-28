@@ -1,11 +1,11 @@
 package com.tt.xenon.common.client;
 
-import com.tt.xenon.common.VrbcServiceInfo;
+import com.tt.xenon.common.ServiceInfo;
 
 /**
  * Created by mageshwaranr on 9/2/2016.
  */
-public enum TestServicesInfo implements VrbcServiceInfo {
+public enum TestServicesInfo implements ServiceInfo {
 
   DUMMY_SERVICE("DummySerivce", "/vrbc/test/dummy/service"),
   SYNC_MOCK("SynchronousMock", "/vrbc/xenon/util/test");

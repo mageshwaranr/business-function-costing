@@ -1,0 +1,61 @@
+{
+ "name": "All",
+ "children": [
+  {
+   "name": "Order",
+   "children": [
+    {
+     "name": "Catalog",
+     "children": [
+      {"name": "Load Balancer", "size": 2000},
+      {"name": "Discovery", "size": 2000},
+      {"name": "Metrics", "size": 2000}
+     ]
+    },
+    {
+     "name": "Customer",
+     "children": [
+      {"name": "Load Balancer", "size": 1000},
+      {"name": "Discovery", "size": 1000},
+      {"name": "Metrics", "size": 1000}
+     ]
+    },
+    {
+     "name": "Ordering",
+     "children": [
+       {"name": "Load Balancer", "size": 200},
+       {"name": "Discovery", "size": 200},
+       {"name": "Metrics", "size": 200}
+     ]
+   },
+   { "name": "Load Balancer", "size": 3000},
+   { "name": "Discovery", "size": 2000},
+   { "name": "Metrics", "size": 2500}
+   ]
+  },
+  {
+   "name": "Inventory",
+   "children": [
+        {
+          "name": "Catalog",
+          "children" : [
+            {"name": "Load Balancer", "size": 200},
+            {"name": "Discovery", "size": 200},
+            {"name": "Metrics", "size": 200}
+          ]
+        },
+        {
+          "name": "Supply Chain",
+          "children" : [
+            {"name": "Load Balancer", "size": 2000},
+            {"name": "Discovery", "size": 2000},
+            {"name": "Metrics", "size": 2000}
+          ]
+        },
+        {"name": "Load Balancer", "size": 2000},
+        {"name": "Discovery", "size": 1000},
+        {"name": "Metrics", "size": 3000}
+   ]
+  }
+ ]
+}

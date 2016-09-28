@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-import com.tt.xenon.common.VrbcServiceInfo;
+import com.tt.xenon.common.ServiceInfo;
 import com.tt.xenon.common.dns.XenonDnsService;
 import com.tt.xenon.common.reflect.MethodInfo;
 import com.tt.xenon.common.reflect.ParamMetadata;
@@ -283,7 +283,7 @@ public class JaxRsServiceClient implements InvocationHandler {
 
     private Class<?> resourceInterface;
     private URI baseUri;
-    private VrbcServiceInfo serviceInfo;
+    private ServiceInfo serviceInfo;
     private URI dnsHostUri;
     private ServiceHost host;
 
@@ -296,7 +296,7 @@ public class JaxRsServiceClient implements InvocationHandler {
       return this;
     }
 
-    public ClientBuilder withServiceInfo(VrbcServiceInfo serviceInfo) {
+    public ClientBuilder withServiceInfo(ServiceInfo serviceInfo) {
       this.serviceInfo = serviceInfo;
       return this;
     }

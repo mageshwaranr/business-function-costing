@@ -10,8 +10,9 @@ public class Underlyer extends ServiceDocument {
 
 
   @UsageOption(option = ServiceDocumentDescription.PropertyUsageOption.SINGLE_ASSIGNMENT)
-  public String name, image, ip;
+  public String name, id;
 
-  public String host, apiVersion;
+  public double cost;
+
 
 }

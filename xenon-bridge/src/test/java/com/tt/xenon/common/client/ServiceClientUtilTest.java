@@ -1,6 +1,6 @@
 package com.tt.xenon.common.client;
 
-import com.tt.xenon.common.VrbcServiceInfo;
+import com.tt.xenon.common.ServiceInfo;
 import com.tt.xenon.common.dns.document.DnsState;
 import org.junit.Test;
 
@@ -34,9 +34,9 @@ public class ServiceClientUtilTest {
 
   @Test
   public void testFromJaxRsResource() throws Exception {
-    VrbcServiceInfo vrbcServiceInfo = fromJaxRsResource(MockServiceClient.class);
-    assertEquals("/vrbc/xenon/util/test", vrbcServiceInfo.serviceLink());
-    assertEquals("MockServiceClient", vrbcServiceInfo.serviceName());
+    ServiceInfo serviceInfo = fromJaxRsResource(MockServiceClient.class);
+    assertEquals("/vrbc/xenon/util/test", serviceInfo.serviceLink());
+    assertEquals("MockServiceClient", serviceInfo.serviceName());
   }
 
 

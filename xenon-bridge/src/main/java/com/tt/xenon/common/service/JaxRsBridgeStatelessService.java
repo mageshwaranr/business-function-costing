@@ -12,8 +12,6 @@ import org.slf4j.LoggerFactory;
  */
 public class JaxRsBridgeStatelessService extends StatelessService {
 
-  protected Logger log = LoggerFactory.getLogger(getClass());
-
   @Override
   public OperationProcessingChain getOperationProcessingChain() {
     if (super.getOperationProcessingChain() != null) {

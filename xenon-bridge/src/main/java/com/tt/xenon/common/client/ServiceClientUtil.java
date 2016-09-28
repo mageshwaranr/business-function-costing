@@ -1,6 +1,6 @@
 package com.tt.xenon.common.client;
 
-import com.tt.xenon.common.VrbcServiceInfo;
+import com.tt.xenon.common.ServiceInfo;
 import com.tt.xenon.common.dns.XenonDnsService;
 import com.tt.xenon.common.dns.document.DnsState;
 import com.tt.xenon.common.query.XenonQueryService;
@@ -76,7 +76,7 @@ public class ServiceClientUtil {
    * @param serviceHostUri
    * @return
    */
-  public static DnsState toDnsState(VrbcServiceInfo serviceInfo, URI serviceHostUri) {
+  public static DnsState toDnsState(ServiceInfo serviceInfo, URI serviceHostUri) {
     DnsState state = new DnsState();
     state.serviceLink = serviceInfo.serviceLink();
     state.serviceName = serviceInfo.serviceName();
@@ -102,8 +102,8 @@ public class ServiceClientUtil {
   }
 
 
-  public static VrbcServiceInfo fromJaxRsResource(Class<?> jaxRsContract) {
-    return new VrbcServiceInfo() {
+  public static ServiceInfo fromJaxRsResource(Class<?> jaxRsContract) {
+    return new ServiceInfo() {
       @Override
       public String serviceLink() {
         return jaxRsContract.getAnnotation(Path.class).value();
@@ -116,8 +116,8 @@ public class ServiceClientUtil {
     };
   }
 
-  public static VrbcServiceInfo cloneWithAvailabilityYes(VrbcServiceInfo info) {
-    return new VrbcServiceInfo() {
+  public static ServiceInfo cloneWithAvailabilityYes(ServiceInfo info) {
+    return new ServiceInfo() {
       @Override
       public String serviceLink() {
         return info.serviceLink();
@@ -135,7 +135,7 @@ public class ServiceClientUtil {
     };
   }
 
-  public static void waitForServiceAvailability(ServiceHost host, VrbcServiceInfo serviceInfo) throws InterruptedException {
+  public static void waitForServiceAvailability(ServiceHost host, ServiceInfo serviceInfo) throws InterruptedException {
     CountDownLatch latch = new CountDownLatch(1);
     host.registerForServiceAvailability(((completedOp, failure) -> latch.countDown()), serviceInfo.serviceLink());
     latch.await(500, TimeUnit.MILLISECONDS);
