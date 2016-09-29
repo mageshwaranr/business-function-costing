@@ -46,7 +46,7 @@ public class ChartingService extends JaxRsBridgeStatelessService {
   @GET
   public CostResponse fetchLineage() {
     CostResponse overAll = new CostResponse();
-    overAll.setName("Over All Cost");
+    overAll.setName("ALL");
     List<CostResponse> childs = getLineage();
     overAll.setSize(childs.stream().mapToDouble(CostResponse::getSize).sum());
     overAll.setChildren(childs);

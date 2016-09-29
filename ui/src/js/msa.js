@@ -11,18 +11,20 @@ var y = d3.scale.linear()
 
 var color = d3.scale.category20c();
 
-var nameToColorMapping = { 'Self' : d3.rgb("#ffffff")}
+var rootNode = 'ALL'
+var counter = 0
 
-var listOfColors = [d3.rgb("#ececec"),d3.rgb("#407574"),
-d3.rgb("#9e7046"),
+var nameToColorMapping = { 'Self' : d3.rgb("#ffffff"),
+rootNode : d3.rgb("#C9C9C9"),
+'Supply Chain' : d3.rgb("#3D706F"),
+'Demands Management' : d3.rgb("#9E7046"),
+}
+
+var listOfColors = [d3.rgb("#ececec"),
 d3.rgb("#a6e6a3"),d3.rgb("#a0cfe2"),
 d3.rgb("#8a96b8"),d3.rgb("#be7d83"),
 d3.rgb("#94a372"),d3.rgb("#4facc4"),
 d3.rgb("#f1bd7e"),d3.rgb("#ececec")]
-
-var counter = 0;
-
-var rootNode = 'Over All Cost'
 
 //Note: Colours for each section can be changed here
 function colorFor(name) {
@@ -74,52 +76,21 @@ var chartHandler = function(error, root) {
     .attr("dx", function(d) { if(d.name == "All") return -10; else return 8; }) // margin
     .attr("dy", ".35em") // vertical-align
     .attr("visibility",function(d) { return d.name == 'Self' ? "hidden" : "visible"})
-    .text(function(d) {
-//    if(d.name == 'Self')
-//        return '';
-    return d.name;
-    });
+    .text(function(d) {return d.name;});
 
 
 //Note: This adds a row to the details section.
 //We delete the old table and add an empty one first, to which we add the new entries
-function addRow(name, value, colour) {
-    if (!document.getElementsByTagName) return;
-
-    old_tbody = document.getElementsByTagName("tbody").item(0);
-
-    var new_tbody = document.createElement('tbody');
-    old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
-
-    //Make an SVG Container
-    svgContainer = d3.select("tbody").append("svg")
-                                             .attr("width", 60)
-                                            .attr("height", 60);
-
-    //Draw the Circle of the colour of the selected section
-    circle = svgContainer.append("circle")
-                               .attr("cx", 30)
-                               .attr("cy", 30)
-                               .attr("r", 25)
-                               .attr("fill", colorFor(name));
-
-    //Create row
-    row = document.createElement("tr");
-
-    //Create each cell of the row
-    cell1 = document.createElement("td");
-    cell2 = document.createElement("td");
-    textnode1=document.createTextNode(name);
-    textnode2=document.createTextNode(value);
-
-    cell1.appendChild(textnode1);
-    cell2.appendChild(textnode2);
-    row.appendChild(cell1);
-    row.appendChild(cell2);
-    new_tbody.appendChild(row);
-
-    //Note: Add new rows like above if more entries are needed for the table
-
+function addRow(d, total) {
+    var name = d.name;
+    d.color = colorFor(name);
+    d.total = total;
+    CostPricing.module.title(d);
+    var desc = getDescendants(d);
+     var filter = desc.filter(function (de) {
+        return de.name !== d.name && de.name.toLowerCase() !== 'self';
+    });
+    CostPricing.module.populateTable(filter);
 }
 
 function getAncestors(node) {
@@ -207,24 +178,16 @@ function click(d) {
               });
 
     //Note: This adds entries to the details tables on the right
-    addRow(d.name, total, d.color);
+    addRow(d, total);
   }
 };
-
 
 //Note: We are reading the json here
 //d3.json("msa.json", function(error, root) {
 
-//d3.json("msa.json", chartHandler);
-d3.json("/msvc/business/function/costing/lineage/all", chartHandler);
+d3.json("./dist/js/lineage.json", chartHandler);
+//d3.json("/msvc/business/function/costing/lineage/all", chartHandler);
 d3.select(self.frameElement).style("height", height + "px");
-//$.getJSON( "/msvc/business/function/costing/consolidated", function( data ) {
-//  console.log(data);
-//  d3.json(data, chartHandler);
-//  d3.select(self.frameElement).style("height", height + "px");
-//});
-
-
 
 // Interpolate the scales!
 function arcTween(d) {

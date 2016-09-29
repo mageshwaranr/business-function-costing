@@ -1,62 +1,118 @@
 body {
-    font-family: 'Segoe UI';
-    font-weight: 300;
+  font-family: 'Segoe UI';
+  font-weight: 300; }
+
+.parent-border {
+  line-height: 100px; }
+
+.table-cell-area {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.table-container {
+    display: table;
+
+    height: 600px;
+}
+
+  .table-key {
+  font-size: 20px;
+      text-transform: UPPercase;
+      margin-right: 20px;
+  }
+
+  div#upperData {
+      overflow: auto;
+  }
+
+  div#tContainer:after {
+      content: '';
+      clear: both;
+      float: none;
+      display: block;
+  }
+
+  .table-value {
+      font-size: 20px;
+      font-weight: bold;
+      margin-right: 20px;
+  }
+
+  .table-row {
+    margin-top: 30px;
+  }
+
+.border-radius {
+  border-radius: 50px;
+  width: 80px;
+  height: 80px;
+  background: RED;
+  display: inline-block;
+  vertical-align: middle; }
+
+.item {
+    float: left;
+        margin-right: 2%;
+        font-size: 20px;
+        margin-left: 5%;
+        margin-top: 10px;
+        color: #000;
+}
+
+.active.item {
+    color: #fff;``
+}
+
+.item a {
+    color: inherit;
 }
 
 .main-container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    
-    .login-container {
-        margin-top: 60%;
-    }
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto; }
+  .main-container .login-container {
+    margin-top: 60%; }
     .field-grp {
-        label {
-            width: 100%;
-            font-size: 12px;
-            line-height: 5px;
-            font-weight: 500;
-            color: #000;
-        }
-        input {
-            width: 50%;
-            margin: 0 0 10px 0;
-            outline: none;
-        }
-        button {
-            border: none;
-            margin-top: 10px;
-            background: #154cbc;
-            color: #fff;
-            font-size: 13px;
-            padding: 5px 8px;
-            height: auto;
-        }
+        margin-top: 20px;
     }
-    .dash-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto auto;
-        text-align: center;
-        display: table;
-        width: 100%;
-        #dashboard-tile {
-            vertical-align: middle;
-            text-align: center;
-            border: 1px solid #000;
-            width: 50%;
-            margin: 0 auto;
-            .metric-sections {
-                border-top: 1px solid #ccc;
-                &:first-child {
-                    border-right: 1px solid #ccc;
-                }
-            }
-        } 
-    }    
-}
+  .main-container .field-grp label {
+    width: 100%;
+    font-size: 20px;
+    line-height: 5px;
+    font-weight: 100;
+    color: #000; }
+  .main-container .field-grp input {
+    width: 50%;
+    margin: 0 0 10px 0;
+    outline: none; }
+  .main-container .field-grp button {
+    border: none;
+    margin-top: 10px;
+    background: #154cbc;
+    color: #fff;
+    font-size: 13px;
+    padding: 5px 8px;
+    height: auto; }
+  .main-container .dash-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto auto;
+    text-align: center;
+    display: table;
+    width: 100%; }
+    .main-container .dash-container #dashboard-tile {
+      vertical-align: middle;
+      text-align: center;
+      border: 1px solid #000;
+      width: 50%;
+      margin: 0 auto; }
+      .main-container .dash-container #dashboard-tile .metric-sections {
+        border-top: 1px solid #ccc; }
+        .main-container .dash-container #dashboard-tile .metric-sections:first-child {
+          border-right: 1px solid #ccc; }

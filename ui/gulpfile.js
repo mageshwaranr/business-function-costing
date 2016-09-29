@@ -19,4 +19,9 @@ gulp.task('watch', function() {
     gulp.watch('src/sass/*.scss', ['sassToCss']);
 });
 
-gulp.task('default', ['sassToCss', 'minifyJs']);
+gulp.task('images', function() {
+    gulp.src('./src/images/**/*')
+    .pipe(gulp.dest('./dist/images'));
+});
+
+gulp.task('default', ['sassToCss', 'minifyJs','images']);
