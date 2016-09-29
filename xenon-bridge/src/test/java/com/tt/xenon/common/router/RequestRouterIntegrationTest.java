@@ -29,7 +29,6 @@ public class RequestRouterIntegrationTest {
   private static TemporaryFolder tmp = new TemporaryFolder();
 
   private MockedStatelessServiceContract serviceProxy;
-  private ChartingServiceContract serviceProxy2;
 
   @BeforeClass
   public static void startHost() throws Throwable {
@@ -39,17 +38,6 @@ public class RequestRouterIntegrationTest {
     args.sandbox = tmp.getRoot().toPath();
     host = XenonHost.newBuilder()
         .withArguments(args)
-        .withService(new ServiceInfo() {
-          @Override
-          public String serviceLink() {
-            return ChartingService.SELF_LINK;
-          }
-
-          @Override
-          public String serviceName() {
-            return "CHartingService";
-          }
-        }, new ChartingService())
         .withService(new ServiceInfo() {
           @Override
           public String serviceLink() {
@@ -68,7 +56,6 @@ public class RequestRouterIntegrationTest {
   public void init() {
     String uri = "http://localhost:" + port;
     serviceProxy = JaxRsServiceClient.newProxy(MockedStatelessServiceContract.class, buildUri(uri));
-    serviceProxy2 = JaxRsServiceClient.newProxy(ChartingServiceContract.class, buildUri(uri));
   }
 
 
@@ -78,9 +65,6 @@ public class RequestRouterIntegrationTest {
     assertEquals("success", body.get("result"));
     assertEquals("value_of_path_param", body.get("pathParam"));
     assertEquals("value_of_query_param", body.get("queryParam"));
-
-    ChartingService.CostResponse costResponse = serviceProxy2.fetchCostResponse("Dummy");
-    System.out.println(costResponse);
   }
 
   @AfterClass
@@ -98,15 +82,6 @@ public class RequestRouterIntegrationTest {
     @GET
     Map<String, String> getWithQueryAndPathAndReturn(@PathParam("pathParam") String pathValue,
                                                      @QueryParam("queryParam") String query);
-
-  }
-
-  @Path(ChartingService.SELF_LINK)
-  public interface ChartingServiceContract {
-
-    @Path("/consolidated")
-    @GET
-    ChartingService.CostResponse fetchCostResponse(@QueryParam("q") String someUnused);
 
   }
 }

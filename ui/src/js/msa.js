@@ -1,6 +1,6 @@
 //Note: Size of the chart can be adjusted here
-var width = 500,
-    height = 600,
+var width = 700,
+    height = 800,
     radius = Math.min(width, height) / 2;
 
 var x = d3.scale.linear()
@@ -11,16 +11,18 @@ var y = d3.scale.linear()
 
 var color = d3.scale.category20c();
 
-var nameToColorMapping = {}
+var nameToColorMapping = { 'Self' : d3.rgb("#ffffff")}
 
 var listOfColors = [d3.rgb("#ececec"),d3.rgb("#407574"),
-d3.rgb("#407574"),d3.rgb("#9e7046"),
+d3.rgb("#9e7046"),
 d3.rgb("#a6e6a3"),d3.rgb("#a0cfe2"),
 d3.rgb("#8a96b8"),d3.rgb("#be7d83"),
 d3.rgb("#94a372"),d3.rgb("#4facc4"),
 d3.rgb("#f1bd7e"),d3.rgb("#ececec")]
 
 var counter = 0;
+
+var rootNode = 'Over All Cost'
 
 //Note: Colours for each section can be changed here
 function colorFor(name) {
@@ -32,52 +34,6 @@ function colorFor(name) {
         nameToColorMapping[name] = mappedColor;
         counter++;
    }
-//
-//
-//  var nodeColor = d3.rgb("#000000");
-//  switch (name) {
-//    case "All":
-//      nodeColor = d3.rgb("#ececec");
-//      break;
-//    case "Over All Cost":
-//      nodeColor = d3.rgb("#ececec");
-//      break;
-//    case "Order":
-//      nodeColor = d3.rgb("#407574");
-//      break;
-//    case "Demands Management":
-//      nodeColor = d3.rgb("#407574");
-//      break;
-//    case "Inventory":
-//      nodeColor = d3.rgb("#9e7046");
-//      break;
-//    case "Supply Management":
-//      nodeColor = d3.rgb("#9e7046");
-//      break;
-//    case "Catalog Service":
-//      nodeColor = d3.rgb("#94a372");
-//      break;
-//    case "Customer":
-//      nodeColor = d3.rgb("#4facc4");
-//      break;
-//    case "Order Service":
-//      nodeColor = d3.rgb("#8a96b8");
-//      break;
-//    case "Load Balancer":
-//      nodeColor = d3.rgb("#f1bd7e");
-//      break;
-//    case "Discovery":
-//      nodeColor = d3.rgb("#a6e6a3");
-//      break;
-//    case "Metrics":
-//      nodeColor = d3.rgb("#a0cfe2");
-//      break;
-//    case "Supply Chain":
-//      nodeColor = d3.rgb("#be7d83");
-//      break;
-//
-//    default:
-//  }
 return mappedColor;
 }
 
@@ -117,7 +73,12 @@ var chartHandler = function(error, root) {
     .attr("x", function(d) { return y(d.y); })
     .attr("dx", function(d) { if(d.name == "All") return -10; else return 8; }) // margin
     .attr("dy", ".35em") // vertical-align
-    .text(function(d) { return d.name; });
+    .attr("visibility",function(d) { return d.name == 'Self' ? "hidden" : "visible"})
+    .text(function(d) {
+//    if(d.name == 'Self')
+//        return '';
+    return d.name;
+    });
 
 
 //Note: This adds a row to the details section.
@@ -204,7 +165,7 @@ function isDescendantOf(child, parent) {
 //Note: This does all the processing when a section is clicked
 function click(d) {
     //If root node (All) then reset the visuals
-    if(d.name == "All")
+    if(d.name == rootNode)
     {
       text.transition().attr("opacity", 1);
       d3.selectAll("path")
@@ -255,7 +216,7 @@ function click(d) {
 //d3.json("msa.json", function(error, root) {
 
 //d3.json("msa.json", chartHandler);
-d3.json("/msvc/business/function/costing/consolidated", chartHandler);
+d3.json("/msvc/business/function/costing/lineage/all", chartHandler);
 d3.select(self.frameElement).style("height", height + "px");
 //$.getJSON( "/msvc/business/function/costing/consolidated", function( data ) {
 //  console.log(data);
@@ -278,8 +239,8 @@ function arcTween(d) {
 }
 
 function computeTextRotation(d) {
-  if(d.name == "All")
+  if(d.name == rootNode)
     return 0;
   else
-    return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
+      return ang = (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
 }

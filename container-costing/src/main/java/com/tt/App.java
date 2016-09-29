@@ -1,5 +1,6 @@
 package com.tt;
 
+import com.tt.businesssvc.ServiceLineage;
 import com.tt.container.dao.ContainerDiscoveryService;
 import com.tt.container.dao.UnderlyerDaoService;
 import com.tt.ui.svc.ChartingService;
@@ -21,6 +22,7 @@ public class App {
         .withService(UI_SERVICE, new ChartingService())
         .withService(UNDERLYER_SVC, new UnderlyerService())
         .withService(CONTAINER_DISCOVERY_SVC, new ContainerDiscoveryService())
+        .withService(SERVICE_LINEAGE_SVC, new ServiceLineage())
         .withService(UNDERLYER_DAO, new UnderlyerDaoService.UnderlyerDaoServiceFactory())
         .buildAndStart();
   }

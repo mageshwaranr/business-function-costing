@@ -1,5 +1,6 @@
 package com.tt;
 
+import com.tt.businesssvc.ServiceLineage;
 import com.tt.container.dao.ContainerDiscoveryService;
 import com.tt.container.dao.UnderlyerDaoService;
 import com.tt.ui.svc.ChartingService;
@@ -16,6 +17,7 @@ public enum CostServicesInfo implements ServiceInfo {
   UNDERLYER_DAO("UnderlyerDaoService", UnderlyerDaoService.SELF_LINK),
   UNDERLYER_SVC("UnderlyerService", UnderlyerService.SELF_LINK),
   CONTAINER_DISCOVERY_SVC("ContainerDiscoveryService", ContainerDiscoveryService.SELF_LINK),
+  SERVICE_LINEAGE_SVC("BusinessServiceLineage", ServiceLineage.SELF_LINK),
   UI_SERVICE ("CostingUiService", ChartingService.SELF_LINK);
 
   private String name, link;
