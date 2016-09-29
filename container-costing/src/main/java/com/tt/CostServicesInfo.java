@@ -1,10 +1,5 @@
 package com.tt;
 
-import com.tt.businesssvc.ServiceLineage;
-import com.tt.container.dao.ContainerDiscoveryService;
-import com.tt.container.dao.UnderlyerDaoService;
-import com.tt.ui.svc.ChartingService;
-import com.tt.underlyer.svc.UnderlyerService;
 import com.tt.xenon.common.ServiceInfo;
 
 /**
@@ -12,13 +7,12 @@ import com.tt.xenon.common.ServiceInfo;
  */
 public enum CostServicesInfo implements ServiceInfo {
 
-  //  ACCOUNT("AccountService", "vrbc/demo/account"),
-//  ACCOUNT_QUERY_SERVICE("ACCOUNT_QUERY_SERVICE", "/vrbc/demo/account/query/name"),
-  UNDERLYER_DAO("UnderlyerDaoService", UnderlyerDaoService.SELF_LINK),
-  UNDERLYER_SVC("UnderlyerService", UnderlyerService.SELF_LINK),
-  CONTAINER_DISCOVERY_SVC("ContainerDiscoveryService", ContainerDiscoveryService.SELF_LINK),
-  SERVICE_LINEAGE_SVC("BusinessServiceLineage", ServiceLineage.SELF_LINK),
-  UI_SERVICE ("CostingUiService", ChartingService.SELF_LINK);
+  UNDERLYER_DAO("UnderlyerDaoService", "/business/underlyer/persistence"),
+  UNDERLYER_SVC("UnderlyerService", "/business/underlyer/svc"),
+  CONTAINER_DISCOVERY_SVC("ContainerDiscoveryService", "/business/container/discovery"),
+  CONTAINER_SVC("ContainerService", "/business/container/persistence"),
+  SERVICE_LINEAGE_SVC("BusinessServiceLineage", "/business/lineage/query"),
+  UI_SERVICE ("CostingUiService", "/business/ux/costing");
 
   private String name, link;
 

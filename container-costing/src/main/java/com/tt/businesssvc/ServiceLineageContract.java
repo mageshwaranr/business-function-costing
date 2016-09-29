@@ -8,14 +8,17 @@ import java.util.List;
 /**
  * Created by mageshwaranr on 9/29/2016.
  */
-@Path(ServiceLineage.SELF_LINK)
 public interface ServiceLineageContract {
 
-  @Path("/all")
+  @Path("/function/all")
   @GET
   List<Node> findAllFunctions();
 
-  @Path("/lineage/function/{functionName}")
+  @Path("/service/all")
+  @GET
+  List<Node> findAllServices();
+
+  @Path("/function/{functionName}")
   @GET
   Node findLineageOfAFunction(@PathParam("functionName") String functionName);
 

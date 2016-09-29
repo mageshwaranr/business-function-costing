@@ -1,10 +1,11 @@
-package com.tt.container.dao;
+package com.tt.underlyer.dao;
 
-import com.tt.container.entity.Underlyer;
+import com.tt.underlyer.entity.Underlyer;
 import com.vmware.xenon.common.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.tt.CostServicesInfo.UNDERLYER_DAO;
 import static com.vmware.xenon.common.Service.ServiceOption.*;
 
 /**
@@ -12,8 +13,6 @@ import static com.vmware.xenon.common.Service.ServiceOption.*;
  */
 public class UnderlyerDaoService extends StatefulService {
 
-
-  public static final String SELF_LINK = UnderlyerDaoServiceFactory.SELF_LINK;
 
   public UnderlyerDaoService() {
     super(Underlyer.class);
@@ -24,8 +23,6 @@ public class UnderlyerDaoService extends StatefulService {
   }
 
   public static class UnderlyerDaoServiceFactory extends FactoryService {
-
-    public static final String SELF_LINK =  "/business/function/dao/underlyer";
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 

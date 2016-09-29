@@ -1,6 +1,6 @@
 package com.tt.underlyer.svc;
 
-import com.tt.container.entity.Underlyer;
+import com.tt.underlyer.entity.Underlyer;
 import com.tt.xenon.common.client.ServiceClientUtil;
 import com.tt.xenon.common.query.XenonQueryService;
 import com.tt.xenon.common.router.RequestRouterBuilder;
@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
+import static com.tt.CostServicesInfo.UNDERLYER_SVC;
 import static com.vmware.xenon.common.ServiceDocument.FIELD_NAME_KIND;
 
 /**
@@ -20,8 +21,6 @@ import static com.vmware.xenon.common.ServiceDocument.FIELD_NAME_KIND;
  */
 public class UnderlyerService extends StatelessService {
 
-
-  public static final String SELF_LINK = "/business/function/svc/underlyer";
 
   public UnderlyerService() {
     super.toggleOption(Service.ServiceOption.URI_NAMESPACE_OWNER, true);

@@ -1,4 +1,4 @@
-package com.tt.container.dao;
+package com.tt.container.svc;
 
 import static com.tt.CostServicesInfo.UNDERLYER_SVC;
 
@@ -15,7 +15,7 @@ import com.spotify.docker.client.DefaultDockerClient;
 import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.messages.Container;
 import com.spotify.docker.client.messages.ContainerStats;
-import com.tt.container.entity.Underlyer;
+import com.tt.underlyer.entity.Underlyer;
 import com.tt.underlyer.svc.UnderlyerSvcContract;
 import com.tt.xenon.common.client.JaxRsServiceClient;
 import com.tt.xenon.common.error.XenonHttpRuntimeException;
@@ -26,10 +26,6 @@ import com.vmware.xenon.common.OperationProcessingChain;
  * Created by mageshwaranr on 9/28/2016.
  */
 public class ContainerDiscoveryService extends JaxRsBridgeStatelessService {
-
-
-  public static final String SELF_LINK = "/business/function/svc/discovery/container";
-
 
   private UnderlyerSvcContract underlyerSvcContract;
 
@@ -93,23 +89,21 @@ public class ContainerDiscoveryService extends JaxRsBridgeStatelessService {
   @Path("/costs")
   @GET
   public CompletableFuture<List<com.tt.container.entity.Container>> containerCost(){
-	 
 	  return underlyerSvcContract.findAll()
-	  .thenApply( underlyers -> {
-		  return underlyers.stream()
-		  .flatMap(underlyer -> containerCost(underlyer).stream())
-		  .collect(Collectors.toList());
-	  });
+		  .thenApply( underlyers -> underlyers
+			  .stream()
+			  .flatMap(underlyer -> containerCost(underlyer).stream())
+			  .collect(Collectors.toList()));
   }
   
   @Path("/all")
   @GET
   public CompletableFuture<List<Container>> findAll() {
-    return underlyerSvcContract.findAll()
-        .thenApply(underlyers -> underlyers
-            .stream()
-            .flatMap(underlyer -> findContainers(underlyer).stream())
-            .collect(Collectors.toList()));
+		return underlyerSvcContract.findAll()
+			.thenApply(underlyers -> underlyers
+				.stream()
+				.flatMap(underlyer -> findContainers(underlyer).stream())
+				.collect(Collectors.toList()));
   }
 
 }

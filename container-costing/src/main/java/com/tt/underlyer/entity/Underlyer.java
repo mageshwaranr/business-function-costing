@@ -1,4 +1,4 @@
-package com.tt.container.entity;
+package com.tt.underlyer.entity;
 
 import com.vmware.xenon.common.ServiceDocument;
 import com.vmware.xenon.common.ServiceDocumentDescription;

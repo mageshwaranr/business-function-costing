@@ -22,9 +22,6 @@ import static java.util.stream.Collectors.summingDouble;
  */
 public class ServiceLineage extends JaxRsBridgeStatelessService {
 
-  public static final String SELF_LINK = "/business/function/query";
-
-
   private Graph graph;
 
   @Override
@@ -35,7 +32,7 @@ public class ServiceLineage extends JaxRsBridgeStatelessService {
     return super.getOperationProcessingChain();
   }
 
-  @Path("/all")
+  @Path("/function/all")
   @GET
   public List<Node> findAllFunctions() {
     Iterable<Vertex> vertices = graph.getVertices("kind", "BusinessFunction");
@@ -46,7 +43,7 @@ public class ServiceLineage extends JaxRsBridgeStatelessService {
     return responses;
   }
 
-  @Path("/services/all")
+  @Path("/service/all")
   @GET
   public List<Node> findAllServices() {
     Iterable<Vertex> vertices = graph.getVertices("kind", "Service");
@@ -70,7 +67,7 @@ public class ServiceLineage extends JaxRsBridgeStatelessService {
         .collect(Collectors.toList());
   }
 
-  @Path("/lineage/function/{functionName}")
+  @Path("/function/{functionName}")
   @GET
   public Node findLineageOfAFunction(@PathParam("functionName") String functionName) {
     Iterable<Vertex> label = graph.getVertices("label", functionName);
