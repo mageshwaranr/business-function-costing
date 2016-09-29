@@ -313,7 +313,6 @@ public class JaxRsServiceClient implements InvocationHandler {
 
     public ClientBuilder withHost(ServiceHost host) {
       this.host = host;
-      this.baseUri = host.getPublicUri();
       return this;
     }
 
@@ -331,10 +330,18 @@ public class JaxRsServiceClient implements InvocationHandler {
         }
         List<URI> serviceUris = serviceByName.nodeReferences.stream().map(hostUri -> extendUri(hostUri, parsePath(resourceInterface))).collect(toList());
         factory = new JaxRsServiceClient(resourceInterface, serviceUris);
-      } else if (baseUri == null) {
-        throw new IllegalArgumentException("Either BaseUri of the target resource is required or DNS Host URI and Service Name is required");
+      } else if (baseUri == null && host == null) {
+        throw new IllegalArgumentException("One of the following details is required ( baseUri or dnsHostUri or host ) and serviceName is required");
       } else {
-        URI serviceUri = addPathFromAnnotation(resourceInterface, baseUri);
+        if(host != null && baseUri == null) {
+          baseUri = host.getPublicUri();
+        }
+        URI serviceUri;
+        if(serviceInfo != null){
+          serviceUri = extendUri(baseUri, serviceInfo.serviceLink());
+        } else {
+          serviceUri = addPathFromAnnotation(resourceInterface, baseUri);
+        }
         factory = new JaxRsServiceClient(resourceInterface, serviceUri);
       }
       factory.host = host;
