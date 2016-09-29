@@ -185,8 +185,8 @@ function click(d) {
 //Note: We are reading the json here
 //d3.json("msa.json", function(error, root) {
 
-d3.json("./dist/js/lineage.json", chartHandler);
-//d3.json("/msvc/business/function/costing/lineage/all", chartHandler);
+//d3.json("./dist/js/lineage.json", chartHandler);
+d3.json("/msvc/business/ux/costing/lineage/all", chartHandler);
 d3.select(self.frameElement).style("height", height + "px");
 
 // Interpolate the scales!

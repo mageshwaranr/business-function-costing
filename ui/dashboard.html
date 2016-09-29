@@ -111,8 +111,8 @@
 <script src="./dist/js/msa.js"></script>
 <script type="text/javascript">
     $( document ).ready(function() {
-        //$.getJSON("/msvc/business/function/query/all", function(result){
-        $.getJSON("./dist/js/all.json", function(result){
+        $.getJSON("/msvc/business/lineage/query/function/all", function(result){
+        <!--$.getJSON("./dist/js/all.json", function(result){-->
         var overallCost = 0;
         $.each(result, function(i, node){
          if(node.label == 'Demands Management' ){

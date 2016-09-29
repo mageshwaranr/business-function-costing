@@ -17,7 +17,7 @@ public class App {
 
   public static void main(String[] args) throws Throwable {
     XenonHost.newBuilder()
-        .withArguments(new String[]{"--port=9091", "--bindAddress=0.0.0.0"})
+        .withArguments(new String[]{"--port=9090", "--bindAddress=0.0.0.0"})
         .withService(UI_SERVICE, new ChartingService())
         .withService(UNDERLYER_SVC, new UnderlyerService())
         .withService(CONTAINER_DISCOVERY_SVC, new ContainerDiscoveryService())
