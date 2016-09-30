@@ -23,4 +23,7 @@ public interface ZipkinQueryService {
   @GET
   List<List<Trace>> findTraces(@QueryParam("limit") int limit, @QueryParam("serviceName") String svcName, @QueryParam("spanName") String spanName);
 
+  @Path("/dependencies")
+  @GET
+  List<Dependency> findDependency(@QueryParam("endTs") long endTs) ;
 }

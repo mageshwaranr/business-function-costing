@@ -1,0 +1,38 @@
+# Zipkin-specific options.
+zipkin:
+
+  collector: http
+  baseUrl: http://10.112.80.92:9411/
+  serviceHost: 127.0.0.1
+  servicePort: 9003
+
+zipkinClient:
+  serviceName: order
+  timeout: 2s
+
+# HTTP-specific options.
+server:
+
+  type: simple
+  applicationContextPath: /
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 10003
+
+  requestLog:
+    appenders:
+      - type: console
+        timeZone: UTC
+        target: stdout
+
+logging:
+  level: INFO
+  loggers:
+    com.smoketurner.dropwizard.zipkin: DEBUG
+    com.example.helloworld: DEBUG
+    com.github.kristofa.brave: DEBUG
+  appenders:
+    - type: console
+      timeZone: UTC
+      target: stdout

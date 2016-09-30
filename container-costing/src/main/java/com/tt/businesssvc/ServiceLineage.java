@@ -27,7 +27,7 @@ public class ServiceLineage extends JaxRsBridgeStatelessService {
   @Override
   public OperationProcessingChain getOperationProcessingChain() {
     if (graph == null) {
-      graph = ServiceLineageGraphFactory.createTinkerGraph();
+      graph = ServiceLineageGraphFactoryFromZipkin.createTinkerGraph();
     }
     return super.getOperationProcessingChain();
   }
